@@ -13,7 +13,8 @@ function extractSpreadsheetId(url) {
 // Fetch data from Google Sheet
 async function getSheetData(spreadsheetId) {
   const auth = new google.auth.GoogleAuth({
-    keyFile: './credentials.json', // Path to credentials
+    // Use environment variable if available, otherwise fallback to file
+    credentials: process.env.GOOGLE_CREDENTIALS ? JSON.parse(process.env.GOOGLE_CREDENTIALS) : require('./credentials.json'),
     scopes: ['https://www.googleapis.com/auth/spreadsheets'],
   });
 
@@ -55,13 +56,13 @@ app.get('/api/students', async (req, res) => {
   }
 });
 
-// Start server locally (only if not in Vercel environment)
-if (!process.env.VERCEL) {
+// Start server locally (only if not in a hosted environment)
+if (!process.env.RENDER) {
   const PORT = process.env.PORT || 3000;
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
   });
 }
 
-// Export for Vercel
+// Export for Render/Vercel
 module.exports = app;
