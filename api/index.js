@@ -57,12 +57,11 @@ app.get('/api/students', async (req, res) => {
 });
 
 // Start server locally (only if not in a hosted environment)
-if (!process.env.RENDER) {
+
   const PORT = process.env.PORT || 3000;
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
   });
-}
 
 // Export for Render/Vercel
 module.exports = app;
