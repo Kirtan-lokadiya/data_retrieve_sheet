@@ -1,0 +1,11 @@
+{
+  "name": "data-retrieve",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node api/index.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "googleapis": "^134.0.0"
+  }
+}
